@@ -31,6 +31,7 @@ func makeHttpHandleFunc(f apiFunc) http.HandlerFunc {
 
 type APIServer struct {
 	listenAddress string
+	store         Storage
 }
 
 func NewAPIServer(listenAddress string) *APIServer {
@@ -42,7 +43,6 @@ func (s *APIServer) Run() {
 
 	router.HandleFunc("/account", makeHttpHandleFunc(s.handleAccount))
 	router.HandleFunc("/account/{id}", makeHttpHandleFunc(s.handleAccount))
-	
 
 	log.Println("Listening on", s.listenAddress)
 
